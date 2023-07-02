@@ -16,37 +16,37 @@ impl Visitor {
     }
     fn greet_visitor(&self) {
         println!("{}", self.greeting);
-    }
-    
+    }   
 }
 
 fn user_name() -> String {
     println!("What is your name?");
     let mut your_name = String::new();
     stdin()
-    .read_line(&mut your_name)
-    .expect("Failed to read line...");
+        .read_line(&mut your_name)
+        .expect("Failed to read line...");
     your_name
-    .trim()
-    .to_lowercase()
+        .trim()
+        .to_lowercase()
     
     
 }
 
 fn main() {
     
-let name = user_name();  
-let visitors = 
-[
-    Visitor::new("Scotty", format!("welcome, {name}!").as_str()),
-    Visitor::new("Lisa", format!("welcome, {name}!").as_str()),
-    Visitor::new("Flora", format!("welcome, {name}!").as_str())
-]; 
+    let name = user_name();  
+    let greeting = format!("Welcome, {}!",name[..1].to_uppercase() + &name[1..]);
+    let visitors = 
+    [
+        Visitor::new("Scotty", &greeting),
+        Visitor::new("Lisa", &greeting),
+        Visitor::new("Flora", &greeting)
+    ]; 
     
-for visitor in 0..visitors.len() {
-    if name == visitors[visitor].name{
-        visitors[visitor].greet_visitor();
-    }      
-}
+    for visitor in 0..visitors.len() {
+        if name == visitors[visitor].name{
+            visitors[visitor].greet_visitor();
+        }      
+    }
 
 }
